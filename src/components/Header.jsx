@@ -4,7 +4,11 @@ import { styled } from "styled-components";
 import homeLogo from "../assets/images/home-logo.svg";
 import userImg from "../assets/images/user.svg";
 import { FaSearch, FaHome, FaBriefcase } from "react-icons/fa";
-import { BsPeopleFill, BsCaretDownFill } from "react-icons/bs";
+import {
+  BsPeopleFill,
+  BsCaretDownFill,
+  BsFillGrid3X3GapFill,
+} from "react-icons/bs";
 import { MdMessage } from "react-icons/md";
 import { IoNotifications } from "react-icons/io5";
 
@@ -87,8 +91,22 @@ const Header = () => {
                 <span>Me</span>
                 <BsCaretDownFill />
               </a>
+              <SignOut>
+                <a href="">Sign out</a>
+              </SignOut>
             </User>
-            <Work></Work>
+            <Work>
+              <a href="">
+                <BsFillGrid3X3GapFill
+                  color="black"
+                  size={22}
+                />
+                <span>
+                  Work
+                  <BsCaretDownFill />
+                </span>
+              </a>
+            </Work>
           </NavListWrap>
         </Nav>
       </Content>
@@ -231,8 +249,47 @@ const NavList = styled.li`
   }
 `;
 
-const User = styled.div``;
+const SignOut = styled.div`
+  position: absolute;
+  top: 45px;
+  background: white;
+  border-radius: 0 0 5px 5px;
+  width: 100px;
+  height: 40px;
+  font-size: 16px;
+  transition-duration: 167ms;
+  text-align: center;
+  display: none;
+`;
 
-const Work = styled.div``;
+const User = styled(NavList)`
+  a > svg {
+    width: 24px;
+    border-radius: 50%;
+  }
+
+  a > img {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+  }
+
+  span {
+    display: flex;
+    align-items: center;
+  }
+
+  &:hover {
+    ${SignOut} {
+      align-items: center;
+      display: flex;
+      justify-content: center;
+    }
+  }
+`;
+
+const Work = styled(User)`
+  border-left: 1px solid rgba(0, 0, 0, 0.08);
+`;
 
 export default Header;
