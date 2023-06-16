@@ -35,7 +35,7 @@ const LeftSide = () => {
         </Widget>
         <Item>
           <span>
-            <FaBookmark />
+            <FaBookmark size={16} />
             My Items
           </span>
         </Item>
