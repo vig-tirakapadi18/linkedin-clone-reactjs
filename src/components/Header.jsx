@@ -11,8 +11,10 @@ import {
 } from "react-icons/bs";
 import { MdMessage } from "react-icons/md";
 import { IoNotifications } from "react-icons/io5";
+import { connect } from "react-redux";
+import { signOutAPT } from "../actions";
 
-const Header = () => {
+const Header = (props) => {
   return (
     <Container>
       <Content>
@@ -83,15 +85,24 @@ const Header = () => {
               </a>
             </NavList>
             <User>
-              <a href="">
-                <img
-                  src={userImg}
-                  alt=""
-                />
-                <span>Me</span>
-                <BsCaretDownFill />
+              <a>
+                {props.user && props.user.photoURL ? (
+                  <img
+                    src={props.user.photoURL}
+                    alt=""
+                  />
+                ) : (
+                  <img
+                    src={userImg}
+                    alt=""
+                  />
+                )}
+                <span>
+                  Me
+                  <BsCaretDownFill />
+                </span>
               </a>
-              <SignOut>
+              <SignOut onClick={() => props.signOut()}>
                 <a href="">Sign out</a>
               </SignOut>
             </User>
@@ -292,4 +303,14 @@ const Work = styled(User)`
   border-left: 1px solid rgba(0, 0, 0, 0.08);
 `;
 
-export default Header;
+const mapStateToProps = (state) => {
+  return {
+    user: state.userState.user,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => ({
+  signOut: () => dispatch(signOutAPT()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

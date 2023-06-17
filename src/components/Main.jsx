@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable jsx-a11y/anchor-has-content */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
@@ -10,6 +11,9 @@ import {
 import { RiArticleFill } from "react-icons/ri";
 import userImg from "../assets/images/user.svg";
 import likeImg from "../assets/images/like.svg";
+import commentImg from "../assets/images/comments.svg";
+import shareImg from "../assets/images/share.svg";
+import sendImg from "../assets/images/send.svg";
 import clappingHandsImg from "../assets/images/clapping-hands.svg";
 
 const Main = () => {
@@ -88,21 +92,33 @@ const Main = () => {
           <SocialCounts>
             <li>
               <button>
-                <img
-                  src={likeImg}
-                  alt=""
-                />
-                <img
-                  src={clappingHandsImg}
-                  alt=""
-                />
+                <img src={likeImg} />
+                <img src={clappingHandsImg} />
+                <span>55</span>
               </button>
-              <span>555</span>
             </li>
             <li>
               <a>2 comments</a>
             </li>
           </SocialCounts>
+          <SocialActions>
+            <button>
+              <img src={likeImg} />
+              <span>Like</span>
+            </button>
+            <button>
+              <img src={commentImg} />
+              <span>Comment</span>
+            </button>
+            <button>
+              <img src={shareImg} />
+              <span>Share</span>
+            </button>
+            <button>
+              <img src={sendImg} />
+              <span>Send</span>
+            </button>
+          </SocialActions>
         </Article>
       </div>
     </Container>
@@ -268,6 +284,56 @@ const SharedImg = styled.div`
   }
 `;
 
-const SocialCounts = styled.div``;
+const SocialCounts = styled.ul`
+  line-height: 1.3;
+  display: flex;
+  align-items: flex-start;
+  overflow: auto;
+  margin: 0 16px;
+  padding: 8px 0;
+  border-bottom: 1px solid #e9e5df;
+  list-style: none;
+
+  li {
+    margin-right: 5px;
+    font-size: 12px;
+
+    button {
+      display: flex;
+
+      img {
+        width: 14px;
+        margin-right: 3px;
+      }
+    }
+  }
+`;
+
+const SocialActions = styled.div`
+  align-items: center;
+  display: flex;
+  justify-content: flex-start;
+  margin: 0;
+  min-height: 40px;
+  padding: 4px 8px;
+
+  button {
+    display: inline-flex;
+    align-items: center;
+    padding: 8px;
+    color: #0a66c2;
+
+    span {
+      margin-left: 1.5px;
+      font-size: 14px;
+    }
+
+    @media (min-width: 768px) {
+      span {
+        margin-left: 5px;
+      }
+    }
+  }
+`;
 
 export default Main;
