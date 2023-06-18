@@ -6,8 +6,9 @@ import photoImg from "../assets/images/photo.svg";
 import cardBgImg from "../assets/images/card-bg.svg";
 import { FaBookmark, FaPlus } from "react-icons/fa";
 import { HiUserPlus } from "react-icons/hi2";
+import { connect } from "react-redux";
 
-const LeftSide = () => {
+const LeftSide = (props) => {
   return (
     <Container>
       <ArtCard>
@@ -15,7 +16,9 @@ const LeftSide = () => {
           <CardBackground />
           <a>
             <Photo />
-            <Link>Welcome, there!</Link>
+            <Link>
+              Welcome, {props.user ? props.user.displayName : "there"}!
+            </Link>
           </a>
           <a>
             <AddPhotoText></AddPhotoText>
@@ -212,4 +215,10 @@ const CommunityCard = styled(ArtCard)`
   }
 `;
 
-export default LeftSide;
+const mapStateToProps = (state) => {
+  return {
+    user: state.userState.user,
+  };
+};
+
+export default connect(mapStateToProps)(LeftSide);

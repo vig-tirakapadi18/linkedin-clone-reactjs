@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable jsx-a11y/anchor-has-content */
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React from "react";
+import React, { useState } from "react";
 import { styled } from "styled-components";
 import {
   BsCardImage,
@@ -15,8 +15,33 @@ import commentImg from "../assets/images/comments.svg";
 import shareImg from "../assets/images/share.svg";
 import sendImg from "../assets/images/send.svg";
 import clappingHandsImg from "../assets/images/clapping-hands.svg";
+import PostModal from "./PostModal";
 
 const Main = () => {
+  const [showModal, setShowModal] = useState("close");
+
+  const clickHandler = (event) => {
+    event.preventDefault();
+
+    if (event.target !== event.currentTarget) {
+      return;
+    }
+
+    switch (showModal) {
+      case "open":
+        setShowModal("close");
+        break;
+
+      case "close":
+        setShowModal("open");
+        break;
+
+      default:
+        setShowModal("close");
+        break;
+    }
+  };
+
   return (
     <Container>
       <ShareBox>
@@ -25,7 +50,7 @@ const Main = () => {
             src={userImg}
             alt=""
           />
-          <button>Start a post</button>
+          <button onClick={clickHandler}>Start a post</button>
         </div>
         <div>
           <button>
@@ -121,6 +146,10 @@ const Main = () => {
           </SocialActions>
         </Article>
       </div>
+      <PostModal
+        showModal={showModal}
+        clickHandler={clickHandler}
+      />
     </Container>
   );
 };

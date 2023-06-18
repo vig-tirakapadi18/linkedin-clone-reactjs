@@ -4,10 +4,18 @@ import { styled } from "styled-components";
 import LeftSide from "./LeftSide";
 import Main from "./Main";
 import RightSide from "./RightSide";
+import { connect } from "react-redux";
+import { Navigate } from "react-router-dom";
 
-const Home = () => {
+const Home = (props) => {
   return (
     <Container>
+      {!props.user && (
+        <Navigate
+          to="/"
+          replace
+        />
+      )}
       <Section>
         <h5>
           <a
@@ -34,12 +42,6 @@ const Container = styled.div`
   padding-top: 52px;
   max-width: 100%;
 `;
-
-// const Content = styled.div`
-//   max-width: 1128px;
-//   margin-left: auto;
-//   margin-right: auto;
-// `;
 
 const Section = styled.section`
   min-height: 50px;
@@ -86,4 +88,10 @@ const Layout = styled.div`
   }
 `;
 
-export default Home;
+const mapStateToProps = (state) => {
+  return {
+    user: state.userState.user,
+  };
+};
+
+export default connect(mapStateToProps)(Home);
